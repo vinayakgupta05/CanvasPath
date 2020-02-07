@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student's Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome {{result1}} !</h2>
+ <h2>Course {{ result5 }}</h2>
+<h3>Course Professor</h3>
+    <table border = 1>
+      <tr>
+          <td> Office Address </td>
+          <td> Email </td>
+          <td> Title </td>
+
+{% for Sname,CourseID, Pname, office_address,email,title in result2 %}
+      </tr>
+            <tr>
+                <td> {{ office_address }} </td>
+                <td> {{ email }} </td>
+                <td> {{ title }} </td>
+{% endfor %}
+            </tr>
+    </table>
+
+<h3>Homework Grade</h3>
+
+<table border = 1>
+      <tr>
+          <td> Homework No. </td>
+          <td> Homework Details </td>
+          <td> Submission </td>
+          <td> Submission </td>
+          <td> Homework Grade</td>
+
+
+      </tr>
+ {% for HwID, HDetail, Hsubmission,HGrade in result3 %}
+
+            <tr>
+                <td> {{ HwID }} </td>
+                <td> {{ HDetail }} </td>
+                <td>{{ Hsubmission }}</td>
+                <td><form action="{{url_for('updatehwsubmission', HwID = HwID)}}" method="POST">
+                    <label for="Hsubmission"></label>
+                    <input type="text" name="Hsubmission" width="50" height="50">
+                    <button type="Save">Submit</button>
+                    </form></td>
+                <td> {{ HGrade }} </td>
+                    </tr>
+    {% endfor %}
+
+    </table>
+
+    <h3>Exam Grade</h3>
+<table border = 1>
+      <tr>
+          <td> Exam No. </td>
+          <td> Exam Details </td>
+          <td> Exam Grade</td>
+
+      </tr>
+        {% for  ExamID, EDetail, EGrade in result4 %}
+
+            <tr>
+                <td> {{ ExamID }} </td>
+                <td> {{ EDetail }} </td>
+                <td> {{ EGrade }} </td>
+
+                    </tr>
+        {% endfor %}
+    </table>
+
+<form action="{{url_for('home')}}" method="POST">
+    <button type="submit">home</button>
+    </form>
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+</body>
+</html>

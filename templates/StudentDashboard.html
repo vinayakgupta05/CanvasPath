@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student's Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome {{name}}!</h2>
+ <h2>Student Details</h2>
+    <table border = 1>
+      <tr>
+          <td> Full Name </td>
+          <td> Age </td>
+          <td> Gender </td>
+          <td> Major </td>
+
+      </tr>
+         {% for name,age,gender,major in result %}
+            <tr>
+                <td> {{ name }} </td>
+                <td> {{ age }} </td>
+                <td> {{ gender }} </td>
+                <td> {{ major }} </td>
+
+            </tr>
+         {%endfor%}
+
+    </table>
+
+<h2>Course details</h2>
+    <table border = 1>
+      <tr>
+
+          <td> Course </td>
+          <td> Section </td>
+      </tr>
+         {% for CourseID, SectionID in result2 %}
+            <tr>
+
+                <td><a href={{url_for('fetchCourseInfo', course= CourseID)}} >{{CourseID}}</a> </td>
+                <td>{{SectionID}}</td>
+
+            </tr>
+         {%endfor%}
+    </table>
+
+<br>
+
+
+<form action="{{url_for('resetPassword')}}" method="POST">
+
+      <input type="hidden" name="email" value={{email}}>
+      <label for="OldPassword">Current Password</label>
+      <input type="password" name="password" value = {{password}} >
+      <label for="NewPassword"> New Password</label>
+      <input type="password" name="NewPassword">
+        <label for="Retypepassword">Confirm Password</label>
+      <input type="password" name="ConfirmPassword">
+      <button type="Save">Update</button>
+    </form>
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+
+</body>
+</html>

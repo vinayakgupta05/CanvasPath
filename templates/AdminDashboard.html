@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin's Dashboard</title>
+</head>
+<body>
+<h2>Welcome Admin!</h2>
+ <h2>Professor Details</h2>
+
+
+
+<h4><a href={{ url_for('fetchCourselist')}}> Courses </a></h4>
+<h4><a href={{ url_for('fetchProflist')}}>Professor Assignments</a></h4>
+<h4><a href={{ url_for('fetchStudentlist')}}>Student Enrollment</a></h4>
+
+
+
+
+
+
+<form action="{{url_for('resetPassword')}}" method="POST">
+
+      <input type="hidden" name="email" value={{email}}>
+      <label for="OldPassword">Current Password</label>
+      <input type="password" name="password" value = {{password}} >
+      <label for="NewPassword"> New Password</label>
+      <input type="password" name="NewPassword">
+        <label for="Retypepassword">Confirm Password</label>
+      <input type="password" name="ConfirmPassword">
+      <button type="Save">Update</button>
+    </form>
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Dashboard</title>
+</head>
+<body>
+<h1>Course Dashboard</h1>
+
+
+<h2>List Of All Courses</h2>
+
+    <table border = 1>
+      <tr>
+
+          <td> CourseID </td>
+          <td> Course Name </td>
+          <td> Course Detail </td>
+          <td> SectionNo. </td>
+          <td> Section Type </td>
+          <td> Section Capacity </td>
+          <td> Team ID </td>
+
+      </tr>
+         {% for CourseID, CName, CDetail,SectionNo, Stype, Slimit, teachingID in result1 %}
+            <tr>
+
+                <td> {{CourseID}} </td>
+                <td> {{CName}}</td>
+                <td> {{CDetail}}</td>
+                <td> {{SectionNo}}</td>
+                <td> {{Stype}}</td>
+                <td> {{Slimit}}</td>
+                <td> {{teachingID}}</td>
+                <td> <form action="{{url_for('deleteCourse', CourseID=CourseID, SectionNo=SectionNo)}}" method="POST">
+                    <button type="submit">delete</button></form></td>
+            </tr>
+         {%endfor%}
+    </table>
+<h2>Add Course</h2>
+
+    <table border = 1>
+
+      <tr>
+          <form action="{{url_for('CreateCourse')}}" method="POST">
+        <td> <label for="CourseID">CourseID</label>
+        <input type="text" name="CourseID" placeholder="Unique/Replace Entry"></td>
+        <td><label for="CourseName">Name</label>
+            <input type="text" name="CName" ></td>
+        <td><label for="Cdetail">Detail</label>
+            <input type="text" name="Cdetail" ></td>
+        <td><label for="SectionNo">Section No.</label>
+            <input type="number" name="SectionNo" placeholder="Unique/Replace Entry" ></td>
+        <td><label for="Stype">Type</label>
+            <input type="text" name="Stype" ></td>
+        <td><label for="Slimit">Capacity</label>
+            <input type="number" name="Slimit" ></td>
+        <td><label for="teachingID">TeamID</label>
+            <input type="number" name="teachingID" >
+            <button type="save">Add</button></td>
+
+    </tr>
+    </table>
+
+<h2>List Of All Professor Assignments</h2>
+
+    <table border = 1>
+      <tr>
+          <td> Name </td>
+          <td> Email </td>
+          <td> Team ID </td>
+          <td> CourseID </td>
+          <td> SectionNo. </td>
+
+
+      </tr>
+         {% for name, email, teachingID, CourseID,SectionNo in result2 %}
+            <tr>
+                <td> {{name}} </td>
+                <td>  {{email}}</td>
+                <td> {{teachingID}}</td>
+                <td> {{CourseID}} </td>
+                <td> {{SectionNo}}</td>
+            </tr>
+    {% endfor %}
+    </table>
+
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+</body>
+</html>

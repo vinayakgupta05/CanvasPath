@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Enrollment</title>
+</head>
+<body>
+<h2>Enrolling Student</h2>
+    <form action="{{url_for('EnrollStud')}}" method="POST">
+         <label for="email">Student Email</label>
+         <select name=email method="POST" action="/" >
+            {% for name, email in result1%}
+            <option value= '{{email }}' SELECTED>{{ email }}</option>
+            {% endfor %}</select>
+
+         <label for="CourseID">Course ID</label>
+         <select name= CourseID method="POST" action="/">
+            {% for  CourseID in result2%}
+            <option value= '{{ CourseID }}' SELECTED>{{ CourseID }}</option>
+
+            {% endfor %}</select>
+         <label for="SectionNo">Section No</label>
+         <select name= SectionNo method="POST" action="/">
+            {% for SectionNo in result4%}
+            <option value= '{{ SectionNo }}' SELECTED>{{ SectionNo }}</option>
+            {% endfor %}</select>
+    <button type="save">Add</button>
+    </form>
+<h3>List of Students</h3>
+
+<table border = 1>
+      <tr>
+          <td> Full Name </td>
+          <td> Email </td>
+
+      </tr>
+         {% for name, email in result1 %}
+            <tr>
+                <td> {{ name }} </td>
+                <td> <a href={{url_for('fetchStudentEnrollmentInfo', email = email)}} >{{email}}</a> </td>
+
+
+            </tr>
+         {%endfor%}</table>
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+</body>
+</html>

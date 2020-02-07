@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student's Dashboard</title>
+</head>
+<body>
+<h2>Student: {{result1}}</h2>
+ <h2>Course {{ result5 }}</h2>
+
+<h3>Homework Grade</h3>
+
+<table border = 1>
+      <tr>
+          <td> Homework No. </td>
+          <td> Homework Details </td>
+          <td> Homework Submission</td>
+          <td> Homework Grade </td>
+          <td> Homework Grade </td>
+
+
+      </tr>
+ {% for HwID, HDetail, hsubmission, HGrade in result3 %}
+
+            <tr>
+                <td> {{ HwID }} </td>
+                <td> {{ HDetail }} </td>
+                <td>{{ hsubmission }}</td>
+                <td> {{ HGrade }} </td>
+                <td><form action="{{url_for('updatehwGrade', HwID = HwID)}}" method="POST">
+                    <label for="HwGrade">Grade</label>
+                    <input type="number" name="HwGrade">
+                    <button type="Save">Update</button>
+                 </form> </td>
+                    </tr>
+    {% endfor %}
+    </table>
+
+    <h3>Exam Grade</h3>
+<table border = 1>
+      <tr>
+          <td> Exam No. </td>
+          <td> Exam Details </td>
+          <td> Exam Grade</td>
+          <td> Exam Grade </td>
+
+      </tr>
+        {% for  ExamID, EDetail, EGrade in result4 %}
+
+            <tr>
+                <td> {{ ExamID }} </td>
+                <td> {{ EDetail }} </td>
+                <td> {{ EGrade }} </td>
+                <td><form action="{{url_for('updateexamGrade', ExamID = ExamID)}}" method="POST">
+                    <label for="ExamGrade">Grade</label>
+                    <input type="number" name="ExamGrade">
+                    <button type="update">Update</button>
+            </form> </td>
+                    </tr>
+        {% endfor %}
+    </table>
+
+
+
+<form action="{{url_for('home')}}" method="POST">
+    <button type="submit">home</button>
+    </form>
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+</body>
+</html>

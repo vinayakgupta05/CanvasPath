@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor's Dashboard</title>
+</head>
+<body>
+<h2>Welcome Professor!</h2>
+ <h2>Section Dashboard </h2>
+
+<h3>Enrolled Students</h3>
+
+<table border = 1>
+      <tr>
+          <td> Full Name </td>
+          <td> Email </td>
+
+      </tr>
+         {% for name, email in result2 %}
+            <tr>
+                <td> {{ name }} </td>
+                <td> <a href={{url_for('fetchStudentCourseInfo', email = email)}} >{{email}}</a> </td>
+
+
+            </tr>
+         {%endfor%}
+
+</table>
+    <h3>Homework details</h3>
+
+        <table border = 1>
+      <tr>
+          <td> Homework No. </td>
+          <td> Detail </td>
+
+      </tr>
+         {% for HomeworkID, Hdetail in result3 %}
+            <tr>
+                <td> {{ HomeworkID}} </td>
+                <td> {{ Hdetail }} </td>
+           <td> <form action="{{url_for('deleteHomework', HwID=HomeworkID)}}" method="POST">
+    <button type="submit">delete</button>
+    </form></td>
+            </tr>
+            {%endfor%}
+             </table>
+
+
+<table border="1">
+    <form action="{{url_for('CreateHomework')}}" method="POST">
+    <td>    <label for="HwID">Homework No.</label>
+    <input type="text" name="HwID" placeholder="Unique/Replace Entry"></td>
+
+    <td><label for="Hdetail">Homework Detail</label>
+        <input type="text" name="Hdetail">
+    <button type="save">Add</button></td>
+        </form>
+             </tr>
+             </table>
+
+
+
+</table>
+
+ <h3>Exam details</h3>
+
+        <table border = 1>
+      <tr>
+          <td> Exam No. </td>
+          <td> Detail </td>
+
+      </tr>
+         {% for ExamID, Edetail in result4 %}
+            <tr>
+                <td> {{ ExamID}} </td>
+                <td> {{ Edetail }} </td>
+            <td> <form action="{{url_for('deleteExam', ExamID=ExamID)}}" method="POST">
+    <button type="submit">delete</button>
+    </form></td>
+            </tr>
+            {%endfor%}
+             </table>
+
+
+<table border="1">
+    <tr>
+    <form action="{{url_for('CreateExam')}}" method="POST">
+        <td><label for="ExamID">Exam No.</label>
+    <input type="text" name="ExamID" placeholder="Unique/Replace Entry">
+    </td>
+
+    <td><label for="Edetail">Exam Detail</label>
+        <input type="text" name="Edetail" >
+    <button type="save">Add</button></td>
+        </form>
+             </tr>
+             </table>
+
+
+<form action="{{url_for('home')}}" method="POST">
+    <button type="submit">home</button>
+    </form>
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+
+</body>
+</html>

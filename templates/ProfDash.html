@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor Dashboard</title>
+</head>
+<body>
+<h1>Professor Dashboard</h1>
+
+<h2>Assigning Team</h2>
+    <form action="{{url_for('AssignTeam')}}" method="POST">
+         <label for="email">Professor Email</label>
+         <select name=email method="POST" action="/" >
+            {% for email in result3%}
+            <option value= '{{email }}' SELECTED>{{ email }}</option>
+            {% endfor %}</select>
+
+         <label for="teachingID">Team ID</label>
+         <select name= teachingID method="POST" action="/">
+            {% for teachingID  in result4%}
+            <option value= '{{ teachingID }}' SELECTED>{{ teachingID }}</option>
+
+            {% endfor %}</select>
+    <button type="save">Add</button>
+    </form>
+
+
+<h2>List Of All Professor Assignments</h2>
+
+    <table border = 1>
+      <tr>
+          <td> Name </td>
+          <td> Email </td>
+          <td> Team ID </td>
+          <td> CourseID </td>
+          <td> SectionNo. </td>
+
+
+      </tr>
+         {% for name, email, teachingID, CourseID,SectionNo in result2 %}
+            <tr>
+                <td> {{name}} </td>
+                <td>  {{email}}</td>
+                <td> {{teachingID}}</td>
+                <td> {{CourseID}} </td>
+                <td> {{SectionNo}}</td>
+            <td> <form action="{{url_for('deleteteamid',email=email, teachingID=teachingID)}}" method="POST">
+                    <button type="submit">delete</button></form></td>
+            </tr>
+    {% endfor %}
+    </table>
+
+<h2>List of All Course Team Assignments</h2>
+<table border = 1>
+      <tr>
+
+
+          <td> CourseID </td>
+          <td> SectionNo. </td>
+          <td> Team ID </td>
+
+      </tr>
+    {% for CourseID, CName, CDetail,SectionNo, Stype, Slimit, teachingID in result1%}            <tr>
+                <td> {{CourseID}} </td>
+                <td> {{SectionNo}}</td>
+                <td> {{teachingID}}</td>
+            </tr>
+    {% endfor %}
+    </table>
+
+<form action="{{url_for('logout')}}" method="POST">
+    <button type="submit">logout</button>
+    </form>
+</body>
+</html>
